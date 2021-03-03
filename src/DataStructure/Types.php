@@ -22,7 +22,7 @@ class Types
     const NAME_SCALAR  = 'scalar';
     const NAME_STRING  = 'string';
 
-    public static function validate($typeName, $data)
+    public static function validate($typeName, $data): bool
     {
         switch (true) {
             case $typeName === self::NAME_ARRAY:

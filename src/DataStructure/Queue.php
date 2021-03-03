@@ -33,17 +33,17 @@ class Queue
         return array_shift($this->data);
     }
 
-    public function isEmpty()
+    public function isEmpty(): bool
     {
         return $this->size() <= 0;
     }
 
-    public function isNotEmpty()
+    public function isNotEmpty(): bool
     {
         return 0 < $this->size();
     }
 
-    public function size()
+    public function size(): int
     {
         return count($this->data);
     }
