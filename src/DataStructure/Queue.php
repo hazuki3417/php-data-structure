@@ -8,7 +8,7 @@
 
 namespace Selen\DataStructure;
 
-class Queue
+class Queue implements QueueInterface
 {
     private $data = [];
 

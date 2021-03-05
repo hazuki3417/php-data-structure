@@ -8,7 +8,7 @@
 
 namespace Selen\DataStructure;
 
-class Stack
+class Stack implements StackInterface
 {
     private $data = [];
 
