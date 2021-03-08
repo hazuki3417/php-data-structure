@@ -170,4 +170,21 @@ class StackTest extends TestCase
 
         $this->assertTrue($instance->isEmpty());
     }
+
+    public function testForeach()
+    {
+        $stack = new Stack('string');
+
+        $objects = ['aaaaa', 'bbbbb', 'ccccc', 'ddddd', 'eeeee', 'fffff'];
+
+        foreach ($objects as $object) {
+            $stack->push($object);
+        }
+
+        foreach ($stack as $key => $stackData) {
+            $this->assertEquals($objects[$key], $stackData);
+        }
+
+        $this->assertTrue($stack->isEmpty());
+    }
 }

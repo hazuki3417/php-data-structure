@@ -8,7 +8,7 @@
 
 namespace Selen\DataStructure;
 
-interface QueueInterface extends ObjectsInterface
+interface QueueInterface extends ObjectsInterface, \Iterator
 {
     public function enqueue($object);
 

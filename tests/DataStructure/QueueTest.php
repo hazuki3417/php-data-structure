@@ -170,4 +170,21 @@ class QueueTest extends TestCase
 
         $this->assertTrue($instance->isEmpty());
     }
+
+    public function testForeach()
+    {
+        $queue = new Queue('string');
+
+        $objects = ['aaaaa', 'bbbbb', 'ccccc', 'ddddd', 'eeeee', 'fffff'];
+
+        foreach ($objects as $object) {
+            $queue->enqueue($object);
+        }
+
+        foreach ($queue as $key => $queueData) {
+            $this->assertEquals($objects[$key], $queueData);
+        }
+
+        $this->assertTrue($queue->isEmpty());
+    }
 }

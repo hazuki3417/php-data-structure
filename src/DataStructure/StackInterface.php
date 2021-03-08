@@ -8,7 +8,7 @@
 
 namespace Selen\DataStructure;
 
-interface StackInterface extends ObjectsInterface
+interface StackInterface extends ObjectsInterface, \Iterator
 {
     public function push($object);
 
