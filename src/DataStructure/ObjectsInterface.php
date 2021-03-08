@@ -8,7 +8,7 @@
 
 namespace Selen\DataStructure;
 
-interface ArrayInterface
+interface ObjectsInterface
 {
     public function isEmpty(): bool;
 

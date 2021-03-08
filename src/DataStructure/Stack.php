@@ -8,10 +8,8 @@
 
 namespace Selen\DataStructure;
 
-class Stack implements StackInterface
+final class Stack extends AbstractStack
 {
-    private $data = [];
-
     private $typeName;
 
     public function __construct(string $typeName)
@@ -19,38 +17,18 @@ class Stack implements StackInterface
         $this->typeName = $typeName;
     }
 
-    public function push($data)
+    public function push($object)
     {
-        $isExpectedType = Types::validate($this->typeName, $data);
+        $isExpectedType = Types::validate($this->typeName, $object);
 
         if (!$isExpectedType) {
             throw new \InvalidArgumentException('Invalid argument type.');
         }
-        $this->data[] = $data;
+        $this->objects[] = $object;
     }
 
     public function pop()
     {
-        return array_pop($this->data);
-    }
-
-    public function isEmpty(): bool
-    {
-        return $this->size() <= 0;
-    }
-
-    public function isNotEmpty(): bool
-    {
-        return 0 < $this->size();
-    }
-
-    public function size(): int
-    {
-        return count($this->data);
-    }
-
-    public function clear()
-    {
-        $this->data = [];
+        return array_pop($this->objects);
     }
 }

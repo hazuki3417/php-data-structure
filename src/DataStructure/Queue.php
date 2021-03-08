@@ -8,10 +8,8 @@
 
 namespace Selen\DataStructure;
 
-class Queue implements QueueInterface
+final class Queue extends AbstractQueue
 {
-    private $data = [];
-
     private $typeName;
 
     public function __construct(string $typeName)
@@ -19,38 +17,18 @@ class Queue implements QueueInterface
         $this->typeName = $typeName;
     }
 
-    public function enqueue($data)
+    public function enqueue($object)
     {
-        $isExpectedType = Types::validate($this->typeName, $data);
+        $isExpectedType = Types::validate($this->typeName, $object);
 
         if (!$isExpectedType) {
             throw new \InvalidArgumentException('Invalid argument type.');
         }
-        $this->data[] = $data;
+        $this->objects[] = $object;
     }
 
     public function dequeue()
     {
-        return array_shift($this->data);
-    }
-
-    public function isEmpty(): bool
-    {
-        return $this->size() <= 0;
-    }
-
-    public function isNotEmpty(): bool
-    {
-        return 0 < $this->size();
-    }
-
-    public function size(): int
-    {
-        return count($this->data);
-    }
-
-    public function clear()
-    {
-        $this->data = [];
+        return array_shift($this->objects);
     }
 }

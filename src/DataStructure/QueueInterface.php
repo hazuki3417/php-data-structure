@@ -8,9 +8,9 @@
 
 namespace Selen\DataStructure;
 
-interface QueueInterface extends ArrayInterface
+interface QueueInterface extends ObjectsInterface
 {
-    public function enqueue($data);
+    public function enqueue($object);
 
     public function dequeue();
 }

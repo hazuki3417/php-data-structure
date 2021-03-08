@@ -8,9 +8,6 @@
 
 namespace Selen\DataStructure;
 
-interface StackInterface extends ObjectsInterface
+abstract class AbstractStack extends AbstractObjects implements StackInterface
 {
-    public function push($object);
-
-    public function pop();
 }

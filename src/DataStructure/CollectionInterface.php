@@ -8,6 +8,9 @@
 
 namespace Selen\DataStructure;
 
-interface CollectionInterface extends ArrayInterface
+interface CollectionInterface extends ObjectsInterface
 {
+    public function add($object);
+
+    public function remove($object);
 }

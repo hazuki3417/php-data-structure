@@ -8,10 +8,8 @@
 
 namespace Selen\DataStructure;
 
-class Collection implements CollectionInterface
+final class Collection extends AbstractCollection
 {
-    private $data = [];
-
     private $typeName;
 
     public function __construct(string $typeName)
@@ -19,23 +17,30 @@ class Collection implements CollectionInterface
         $this->typeName = $typeName;
     }
 
-    public function isEmpty(): bool
+    public function add($object)
     {
-        return $this->size() <= 0;
+        $isExpectedType = Types::validate($this->typeName, $object);
+
+        if (!$isExpectedType) {
+            throw new \InvalidArgumentException('Invalid argument type.');
+        }
+        $this->objects[] = $object;
+        return true;
     }
 
-    public function isNotEmpty(): bool
+    public function remove($object)
     {
-        return 0 < $this->size();
-    }
+        $isExpectedType = Types::validate($this->typeName, $object);
 
-    public function size(): int
-    {
-        return count($this->data);
-    }
+        if (!$isExpectedType) {
+            throw new \InvalidArgumentException('Invalid argument type.');
+        }
 
-    public function clear()
-    {
-        $this->data = [];
+        $index = \array_search($object, $this->objects, true);
+
+        if ($index !== false) {
+            unset($this->objects[$index]);
+        }
+        return true;
     }
 }
