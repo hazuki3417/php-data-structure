@@ -16,6 +16,7 @@ exclude_patterns:
   - "**/vendor/"
   - "docs/"
   - "**/examples/"
+  - "**/*Interface.php"
 
 # pluginsの中で除外する場合はplugin名の直下に記述する
 # plugins: 
