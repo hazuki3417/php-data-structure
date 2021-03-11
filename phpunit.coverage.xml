@@ -35,5 +35,9 @@
         <include>
             <directory suffix=".php">src</directory>
         </include>
+        <report>
+            <clover outputFile="docs/coverage/clover.xml"/>
+            <html outputDirectory="docs/coverage" lowUpperBound="50" highLowerBound="90"/>
+        </report>
     </coverage>
 </phpunit>
