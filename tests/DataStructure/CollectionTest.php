@@ -55,10 +55,7 @@ class CollectionTest extends TestCase
         $addData1 = new \DateTime();
         $addData2 = $addData1->format('Y-m-d');
 
-        $this->assertEquals(0, $instance->size());
-
         $instance->add($addData1);
-        $this->assertEquals(1, $instance->size());
 
         $this->expectException(\InvalidArgumentException::class);
 
@@ -69,114 +66,140 @@ class CollectionTest extends TestCase
     {
         $instance = new Collection(\DateTime::class);
 
-        $this->assertTrue($instance->isEmpty());
+        $removeData1 = new \DateTime();
+        $removeData2 = new \DateTime('-7 days');
 
-        $addData1 = new \DateTime();
-        $addData2 = new \DateTime('-7 days');
+        $this->assertEquals(0, $instance->size());
 
-        $this->assertTrue($instance->add($addData1));
+        $this->assertTrue($instance->add($removeData1));
         $this->assertEquals(1, $instance->size());
 
-        $this->assertTrue($instance->add($addData2));
+        $this->assertTrue($instance->add($removeData2));
         $this->assertEquals(2, $instance->size());
 
-        $this->assertTrue($instance->remove($addData1));
+        $this->assertTrue($instance->remove($removeData1));
         $this->assertEquals(1, $instance->size());
 
-        $this->assertTrue($instance->remove($addData2));
+        $this->assertTrue($instance->remove($removeData2));
         $this->assertEquals(0, $instance->size());
     }
 
-    // public function testIsEmpty()
-    // {
-    //     $instance = new Collection('string');
+    public function testRemoveException()
+    {
+        $instance = new Collection(\DateTime::class);
 
-    //     $this->assertTrue($instance->isEmpty());
+        $removeData1 = new \DateTime();
+        $removeData2 = $removeData1->format('Y-m-d');
 
-    //     $instance->add('add data1');
+        $instance->add($removeData1);
 
-    //     $this->assertFalse($instance->isEmpty());
+        $this->expectException(\InvalidArgumentException::class);
 
-    //     $instance->add('add data2');
+        $instance->add($removeData2);
+    }
 
-    //     $this->assertFalse($instance->isEmpty());
+    public function testIsEmpty()
+    {
+        $instance = new Collection(\DateTime::class);
 
-    //     $instance->deCollection();
+        $targetData1 = new \DateTime();
+        $targetData2 = new \DateTime('-7 days');
 
-    //     $this->assertFalse($instance->isEmpty());
+        $this->assertTrue($instance->isEmpty());
 
-    //     $instance->deCollection();
+        $instance->add($targetData1);
 
-    //     $this->assertTrue($instance->isEmpty());
-    // }
+        $this->assertFalse($instance->isEmpty());
 
-    // public function testIsNotEmpty()
-    // {
-    //     $instance = new Collection('string');
+        $instance->add($targetData2);
 
-    //     $this->assertFalse($instance->isNotEmpty());
+        $this->assertFalse($instance->isEmpty());
 
-    //     $instance->add('add data1');
+        $instance->remove($targetData1);
 
-    //     $this->assertTrue($instance->isNotEmpty());
+        $this->assertFalse($instance->isEmpty());
 
-    //     $instance->add('add data2');
+        $instance->remove($targetData2);
 
-    //     $this->assertTrue($instance->isNotEmpty());
+        $this->assertTrue($instance->isEmpty());
+    }
 
-    //     $instance->deCollection();
+    public function testIsNotEmpty()
+    {
+        $instance = new Collection(\DateTime::class);
 
-    //     $this->assertTrue($instance->isNotEmpty());
+        $targetData1 = new \DateTime();
+        $targetData2 = new \DateTime('-7 days');
 
-    //     $instance->deCollection();
+        $this->assertFalse($instance->isNotEmpty());
 
-    //     $this->assertFalse($instance->isNotEmpty());
-    // }
+        $instance->add($targetData1);
 
-    // public function testSize()
-    // {
-    //     $instance = new Collection('string');
+        $this->assertTrue($instance->isNotEmpty());
 
-    //     $this->assertEquals(0, $instance->size());
+        $instance->add($targetData2);
 
-    //     $instance->add('add data1');
+        $this->assertTrue($instance->isNotEmpty());
 
-    //     $this->assertEquals(1, $instance->size());
+        $instance->remove($targetData1);
 
-    //     $instance->add('add data2');
+        $this->assertTrue($instance->isNotEmpty());
 
-    //     $this->assertEquals(2, $instance->size());
+        $instance->remove($targetData2);
 
-    //     $instance->deCollection();
+        $this->assertFalse($instance->isNotEmpty());
+    }
 
-    //     $this->assertEquals(1, $instance->size());
+    public function testSize()
+    {
+        $instance = new Collection(\DateTime::class);
 
-    //     $instance->deCollection();
+        $targetData1 = new \DateTime();
+        $targetData2 = new \DateTime('-7 days');
 
-    //     $this->assertEquals(0, $instance->size());
-    // }
+        $this->assertEquals(0, $instance->size());
 
-    // public function testClear()
-    // {
-    //     $instance = new Collection('string');
+        $instance->add($targetData1);
 
-    //     $this->assertTrue($instance->isEmpty());
+        $this->assertEquals(1, $instance->size());
 
-    //     $instance->add('add data1');
+        $instance->add($targetData2);
 
-    //     $this->assertTrue($instance->isNotEmpty());
+        $this->assertEquals(2, $instance->size());
 
-    //     $instance->clear();
+        $instance->remove($targetData1);
 
-    //     $this->assertTrue($instance->isEmpty());
+        $this->assertEquals(1, $instance->size());
 
-    //     $instance->add('add data1');
-    //     $instance->add('add data2');
+        $instance->remove($targetData2);
 
-    //     $this->assertTrue($instance->isNotEmpty());
+        $this->assertEquals(0, $instance->size());
+    }
 
-    //     $instance->clear();
+    public function testClear()
+    {
+        $instance = new Collection(\DateTime::class);
 
-    //     $this->assertTrue($instance->isEmpty());
-    // }
+        $targetData1 = new \DateTime();
+        $targetData2 = new \DateTime('-7 days');
+
+        $this->assertTrue($instance->isEmpty());
+
+        $instance->add($targetData1);
+
+        $this->assertTrue($instance->isNotEmpty());
+
+        $instance->clear();
+
+        $this->assertTrue($instance->isEmpty());
+
+        $instance->add($targetData1);
+        $instance->add($targetData2);
+
+        $this->assertTrue($instance->isNotEmpty());
+
+        $instance->clear();
+
+        $this->assertTrue($instance->isEmpty());
+    }
 }
