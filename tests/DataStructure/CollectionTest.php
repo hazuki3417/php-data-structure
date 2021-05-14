@@ -91,11 +91,11 @@ class CollectionTest extends TestCase
         $removeData1 = new \DateTime();
         $removeData2 = $removeData1->format('Y-m-d');
 
-        $instance->add($removeData1);
+        $instance->remove($removeData1);
 
         $this->expectException(\InvalidArgumentException::class);
 
-        $instance->add($removeData2);
+        $instance->remove($removeData2);
     }
 
     public function testIsEmpty()
